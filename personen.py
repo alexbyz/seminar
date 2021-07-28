@@ -14,7 +14,8 @@ var = {
 
 net = Network(height='1400px', width='1400px', directed=True)   #define network
 
-datei="beispiel.json"
+#datei="toeckl.json"
+datei="schehel.json"
 
 setColor = "DodgerBlue"
 

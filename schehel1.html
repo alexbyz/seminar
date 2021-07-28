@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1400px;
+            height: 1400px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "DodgerBlue", "group": 1, "id": "78v_1_II", "label": "78v_1_II\n28.3.1438\nkauf\nneusiedl", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "agnes_frau_von_georg_symerman_78v_1_II", "label": "agnes_frau_von_georg_symerman_78v_1_II", "shape": "dot", "size": 10}, {"color": "Orange", "group": 3, "id": "michael_schehel", "label": "michael_schehel", "shape": "dot", "size": 10}, {"color": "Orange", "group": 3, "id": "dorothea_78v_2_II", "label": "dorothea_78v_2_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "78v_2_II", "label": "78v_2_II\n29.3.1438\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "Orange", "group": 3, "id": "niclas_toeckl", "label": "niclas_toeckl", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "82v_1_II", "label": "82v_1_II\n24.2.1439\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "Orange", "group": 3, "id": "anna_66r_3_I", "label": "anna_66r_3_I", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "DodgerBlue", "from": "agnes_frau_von_georg_symerman_78v_1_II", "to": "78v_1_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "michael_schehel", "to": "dorothea_78v_2_II"}, {"arrows": "to", "color": "Orange", "from": "dorothea_78v_2_II", "to": "michael_schehel"}, {"arrows": "to", "color": "DodgerBlue", "from": "78v_1_II", "to": "michael_schehel", "width": 3}, {"arrows": "to", "color": "Orange", "from": "michael_schehel", "to": "dorothea_78v_2_II"}, {"arrows": "to", "color": "Orange", "from": "dorothea_78v_2_II", "to": "michael_schehel"}, {"arrows": "to", "color": "DodgerBlue", "from": "michael_schehel", "to": "78v_2_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "agnes_frau_von_georg_symerman_78v_1_II", "to": "niclas_toeckl"}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "agnes_frau_von_georg_symerman_78v_1_II"}, {"arrows": "to", "color": "DodgerBlue", "from": "78v_2_II", "to": "agnes_frau_von_georg_symerman_78v_1_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "michael_schehel", "to": "dorothea_78v_2_II"}, {"arrows": "to", "color": "Orange", "from": "dorothea_78v_2_II", "to": "michael_schehel"}, {"arrows": "to", "color": "DodgerBlue", "from": "michael_schehel", "to": "82v_1_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "82v_1_II", "to": "niclas_toeckl", "width": 3}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

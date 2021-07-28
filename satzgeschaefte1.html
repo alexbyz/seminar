@@ -1,0 +1,216 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1400px;
+            height: 1400px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 1400px;
+            height: 1400px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "DodgerBlue", "group": 1, "id": "61v_3_I", "label": "61v_3_I", "shape": "box", "size": 20, "title": "weingarten"}, {"color": "Tomato", "group": 2, "id": "niklas_von_waidhofen", "label": "niklas_von_waidhofen", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_61v_3_I", "label": "katharina_61v_3_I", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "abt_paul", "label": "abt_paul", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "sedliz", "label": "sedliz", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_3_II", "label": "61v_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "philipp_woelteich", "label": "philipp_woelteich", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_61v_3_II", "label": "katharina_61v_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_6_I", "label": "61v_6_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "peter_?tsseuh", "label": "peter_?tsseuh", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_61v_6_I", "label": "katharina_61v_6_I", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "probst_georg", "label": "probst_georg", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "klosterneuburg", "label": "klosterneuburg", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_7_I", "label": "61v_7_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "oswald_sawr", "label": "oswald_sawr", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_61v_7_I", "label": "margarethe_61v_7_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_2_II", "label": "61v_2_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "ulrich_pamays", "label": "ulrich_pamays", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "anna_61v_2_II", "label": "anna_61v_2_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "62v_3_II", "label": "62v_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "stephan_friml", "label": "stephan_friml", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "anna_62v_3_II", "label": "anna_62v_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "63r_1_I", "label": "63r_1_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "georg_awer", "label": "georg_awer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "elisabeth_63r_1_I", "label": "elisabeth_63r_1_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "64r_3_II", "label": "64r_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "albrecht_kuninger", "label": "albrecht_kuninger", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "clara_64r_3_II", "label": "clara_64r_3_II", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "abt_jakob", "label": "abt_jakob", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "kremsmuenster", "label": "kremsmuenster", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65r_1_I", "label": "65r_1_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "bernhard_hofkircher", "label": "bernhard_hofkircher", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "anna_65r_1_I", "label": "anna_65r_1_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65r_3_I", "label": "65r_3_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "frau_agnes", "label": "frau_agnes", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "heinrich_peffer", "label": "heinrich_peffer", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65v_3_II", "label": "65v_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "andreas_bruzsch", "label": "andreas_bruzsch", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "sankt_stephan_altar", "label": "sankt_stephan_altar", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "pfarrkirche", "label": "pfarrkirche", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65v_3_I", "label": "65v_3_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "hans_schopphouben", "label": "hans_schopphouben", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina61v_2_II", "label": "katharina61v_2_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "66v_4_II", "label": "66v_4_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "philipp_fremstamer", "label": "philipp_fremstamer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_66v_4_II", "label": "margarethe_66v_4_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67r_3_II", "label": "67r_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "syman_premen", "label": "syman_premen", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_67r_3_II", "label": "agnes_67r_3_II", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "probst_hans", "label": "probst_hans", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "passau", "label": "passau", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67v_3_I", "label": "67v_3_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "hans_brunner", "label": "hans_brunner", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_67v_3_I", "label": "agnes_67v_3_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67v_4_I", "label": "67v_4_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "ulrich_strobl", "label": "ulrich_strobl", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "dorothea_67v_4_I", "label": "dorothea_67v_4_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67v_3_II", "label": "67v_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "wolfgang_rynner", "label": "wolfgang_rynner", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "elisabeth_67v_3_II", "label": "elisabeth_67v_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "69r_1_I", "label": "69r_1_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "reinhard_umbcherer", "label": "reinhard_umbcherer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "elisabeth_69r_1_I", "label": "elisabeth_69r_1_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "69r_5_I", "label": "69r_5_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "thomas_payr", "label": "thomas_payr", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_69r_5_I", "label": "margarethe_69r_5_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "70r_3_II", "label": "70r_3_II", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "thomas_smyzer", "label": "thomas_smyzer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "elisabeth_70r_3_II", "label": "elisabeth_70r_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "70v_1_I", "label": "70v_1_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "paul_hofman", "label": "paul_hofman", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_70v_1_I", "label": "agnes_70v_1_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "76v_3_I", "label": "76v_3_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "hans_hofer", "label": "hans_hofer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "kunigunde_76v_2_I", "label": "kunigunde_76v_2_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "80v_1_II", "label": "80v_1_II", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "jacob_mittendrin", "label": "jacob_mittendrin", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_80v_1_II", "label": "katharina_80v_1_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "80r_4_I", "label": "80r_4_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "frau_margarethe_80r_4_I", "label": "frau_margarethe_80r_4_I", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "hans_f\u00fcrer", "label": "hans_f\u00fcrer", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "80v_4_II", "label": "80v_4_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "stehpan_tanhauser", "label": "stehpan_tanhauser", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_80v_3_II", "label": "agnes_80v_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "81r_1_I", "label": "81r_1_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "83r_4_II", "label": "83r_4_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "84r_1_II", "label": "84r_1_II", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "DodgerBlue", "group": 1, "id": "86r_3_I", "label": "86r_3_I", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "peter_lamperger", "label": "peter_lamperger", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "86v_2_I", "label": "86v_2_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "michael_polz", "label": "michael_polz", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "magdalena_86v_2_I", "label": "magdalena_86v_2_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "88r_2_I", "label": "88r_2_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "stephan_Gremelsterer", "label": "stephan_Gremelsterer", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "88r_1_II", "label": "88r_1_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "89r_1_I", "label": "89r_1_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "92r_2_II", "label": "92r_2_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "konrad_haslinger", "label": "konrad_haslinger", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "dorothea_92r_2_II", "label": "dorothea_92r_2_II", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "probst_simon", "label": "probst_simon", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "92r_3_II", "label": "92r_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "hans_passauer", "label": "hans_passauer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_92r_3_II", "label": "agnes_92r_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "93v_5_II", "label": "93v_5_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "hans_rughalm", "label": "hans_rughalm", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "barbara_93v_5_II", "label": "barbara_93v_5_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "96r_3_II", "label": "96r_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "niclas_rews", "label": "niclas_rews", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "barbara_96r_3_II", "label": "barbara_96r_3_II", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "probst_johannes", "label": "probst_johannes", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "duernstein", "label": "duernstein", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "96r_4_II", "label": "96r_4_II", "shape": "box", "size": 20, "title": ["weingarten"]}, {"color": "Tomato", "group": 2, "id": "stephan_raitaler", "label": "stephan_raitaler", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "98r_2_I", "label": "98r_2_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "ulrich_tribel", "label": "ulrich_tribel", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_98r_2_I", "label": "margarethe_98r_2_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "100r_6_II", "label": "100r_6_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "100v_2_I", "label": "100v_2_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "100v_3_I", "label": "100v_3_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "gengel_tewfell?", "label": "gengel_tewfell?", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "101r_3_II", "label": "101r_3_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "martin_krizczendorff", "label": "martin_krizczendorff", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "dorothea_101r_3_II", "label": "dorothea_101r_3_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "101v_2_II", "label": "101v_2_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "dietrich_trager", "label": "dietrich_trager", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "christine_101v_2_II", "label": "christine_101v_2_II", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "buergerspital", "label": "buergerspital", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_3_I", "label": "102v_3_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "thomas_sterrker", "label": "thomas_sterrker", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_6_I", "label": "102v_6_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "kainz_zwedlles", "label": "kainz_zwedlles", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_101v_6_I", "label": "katharina_101v_6_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_8_I", "label": "102v_8_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "hans_dromer", "label": "hans_dromer", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_4_II", "label": "102v_4_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "erhard_trandl", "label": "erhard_trandl", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_102v_4_II", "label": "margarethe_102v_4_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_7_II", "label": "102v_7_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "paul_gapler", "label": "paul_gapler", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "anna_102v_7_II", "label": "anna_102v_7_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "103r_5_I", "label": "103r_5_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "103r_5_II", "label": "103r_5_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "andreas_marchfeld", "label": "andreas_marchfeld", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "margarethe_103r_5_II", "label": "margarethe_103r_5_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "104r_1_I", "label": "104r_1_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "stephan_phingst", "label": "stephan_phingst", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "105r_4_I", "label": "105r_4_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "DodgerBlue", "group": 1, "id": "106v_5_I", "label": "106v_5_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "peter_neunmartter", "label": "peter_neunmartter", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "katharina_106v_5_I", "label": "katharina_106v_5_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "107r_2_I", "label": "107r_2_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "thomas_kempel", "label": "thomas_kempel", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "agnes_107r_2_I", "label": "agnes_107r_2_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "107r_1_II", "label": "107r_1_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "green", "group": 3, "id": "abt_peter", "label": "abt_peter", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "lilienfeld", "label": "lilienfeld", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "108r_6_II", "label": "108r_6_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "konrad_prrichueber", "label": "konrad_prrichueber", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "108v_1_I", "label": "108v_1_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "christian_stunczer", "label": "christian_stunczer", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "elisabeth_108v_1_I", "label": "elisabeth_108v_1_I", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "chorherren", "label": "chorherren", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "109r_5_I", "label": "109r_5_I", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "stephan_huber", "label": "stephan_huber", "shape": "dot", "size": 10}, {"color": "Tomato", "group": 2, "id": "dorothea_109r_5_I", "label": "dorothea_109r_5_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "109r_4_II", "label": "109r_4_II", "shape": "box", "size": 20, "title": ["haus"]}, {"color": "Tomato", "group": 2, "id": "friedrich_waldhofer", "label": "friedrich_waldhofer", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "prior_markus", "label": "prior_markus", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "niklas_von_waidhofen", "to": "katharina_61v_3_I"}, {"color": "DodgerBlue", "from": "niklas_von_waidhofen", "to": "61v_3_I"}, {"color": "green", "from": "abt_paul", "to": "sedliz"}, {"color": "DodgerBlue", "from": "61v_3_I", "to": "abt_paul"}, {"from": "philipp_woelteich", "to": "katharina_61v_3_II"}, {"color": "DodgerBlue", "from": "philipp_woelteich", "to": "61v_3_II"}, {"color": "DodgerBlue", "from": "61v_3_II", "to": "abt_paul"}, {"from": "peter_?tsseuh", "to": "katharina_61v_6_I"}, {"color": "DodgerBlue", "from": "peter_?tsseuh", "to": "61v_6_I"}, {"color": "green", "from": "probst_georg", "to": "klosterneuburg"}, {"color": "DodgerBlue", "from": "61v_6_I", "to": "probst_georg"}, {"from": "oswald_sawr", "to": "margarethe_61v_7_I"}, {"color": "DodgerBlue", "from": "oswald_sawr", "to": "61v_7_I"}, {"color": "DodgerBlue", "from": "61v_7_I", "to": "probst_georg"}, {"from": "ulrich_pamays", "to": "anna_61v_2_II"}, {"color": "DodgerBlue", "from": "ulrich_pamays", "to": "61v_2_II"}, {"color": "DodgerBlue", "from": "61v_2_II", "to": "probst_georg"}, {"from": "stephan_friml", "to": "anna_62v_3_II"}, {"color": "DodgerBlue", "from": "stephan_friml", "to": "62v_3_II"}, {"color": "DodgerBlue", "from": "62v_3_II", "to": "abt_paul"}, {"from": "georg_awer", "to": "elisabeth_63r_1_I"}, {"color": "DodgerBlue", "from": "georg_awer", "to": "63r_1_I"}, {"color": "DodgerBlue", "from": "63r_1_I", "to": "abt_paul"}, {"from": "albrecht_kuninger", "to": "clara_64r_3_II"}, {"color": "DodgerBlue", "from": "albrecht_kuninger", "to": "64r_3_II"}, {"color": "green", "from": "abt_jakob", "to": "kremsmuenster"}, {"color": "DodgerBlue", "from": "64r_3_II", "to": "abt_jakob"}, {"from": "bernhard_hofkircher", "to": "anna_65r_1_I"}, {"color": "DodgerBlue", "from": "bernhard_hofkircher", "to": "65r_1_I"}, {"color": "DodgerBlue", "from": "65r_1_I", "to": "abt_jakob"}, {"from": "frau_agnes", "to": "heinrich_peffer"}, {"color": "DodgerBlue", "from": "frau_agnes", "to": "65r_3_I"}, {"color": "DodgerBlue", "from": "65r_3_I", "to": "abt_jakob"}, {"from": "andreas_bruzsch", "to": "65v_3_II"}, {"color": "green", "from": "sankt_stephan_altar", "to": "pfarrkirche"}, {"color": "DodgerBlue", "from": "65v_3_II", "to": "sankt_stephan_altar"}, {"from": "hans_schopphouben", "to": "katharina61v_2_II"}, {"color": "DodgerBlue", "from": "hans_schopphouben", "to": "65v_3_I"}, {"color": "DodgerBlue", "from": "65v_3_I", "to": "probst_georg"}, {"from": "philipp_fremstamer", "to": "margarethe_66v_4_II"}, {"color": "DodgerBlue", "from": "philipp_fremstamer", "to": "66v_4_II"}, {"color": "DodgerBlue", "from": "66v_4_II", "to": "probst_georg"}, {"from": "syman_premen", "to": "agnes_67r_3_II"}, {"color": "DodgerBlue", "from": "syman_premen", "to": "67r_3_II"}, {"color": "green", "from": "probst_hans", "to": "passau"}, {"color": "DodgerBlue", "from": "67r_3_II", "to": "probst_hans"}, {"from": "hans_brunner", "to": "agnes_67v_3_I"}, {"color": "DodgerBlue", "from": "hans_brunner", "to": "67v_3_I"}, {"color": "DodgerBlue", "from": "67v_3_I", "to": "probst_georg"}, {"from": "ulrich_strobl", "to": "dorothea_67v_4_I"}, {"color": "DodgerBlue", "from": "ulrich_strobl", "to": "67v_4_I"}, {"color": "DodgerBlue", "from": "67v_4_I", "to": "probst_georg"}, {"from": "wolfgang_rynner", "to": "elisabeth_67v_3_II"}, {"color": "DodgerBlue", "from": "wolfgang_rynner", "to": "67v_3_II"}, {"color": "DodgerBlue", "from": "67v_3_II", "to": "probst_georg"}, {"from": "reinhard_umbcherer", "to": "elisabeth_69r_1_I"}, {"color": "DodgerBlue", "from": "reinhard_umbcherer", "to": "69r_1_I"}, {"color": "DodgerBlue", "from": "69r_1_I", "to": "probst_georg"}, {"from": "thomas_payr", "to": "margarethe_69r_5_I"}, {"color": "DodgerBlue", "from": "thomas_payr", "to": "69r_5_I"}, {"color": "DodgerBlue", "from": "69r_5_I", "to": "abt_paul"}, {"from": "thomas_smyzer", "to": "elisabeth_70r_3_II"}, {"color": "DodgerBlue", "from": "thomas_smyzer", "to": "70r_3_II"}, {"color": "DodgerBlue", "from": "70r_3_II", "to": "abt_paul"}, {"from": "paul_hofman", "to": "agnes_70v_1_I"}, {"color": "DodgerBlue", "from": "paul_hofman", "to": "70v_1_I"}, {"color": "DodgerBlue", "from": "70v_1_I", "to": "probst_georg"}, {"from": "hans_hofer", "to": "kunigunde_76v_2_I"}, {"color": "DodgerBlue", "from": "hans_hofer", "to": "76v_3_I"}, {"color": "DodgerBlue", "from": "76v_3_I", "to": "probst_georg"}, {"from": "jacob_mittendrin", "to": "katharina_80v_1_II"}, {"color": "DodgerBlue", "from": "jacob_mittendrin", "to": "80v_1_II"}, {"color": "DodgerBlue", "from": "80v_1_II", "to": "abt_paul"}, {"from": "frau_margarethe_80r_4_I", "to": "hans_f\u00fcrer"}, {"color": "DodgerBlue", "from": "frau_margarethe_80r_4_I", "to": "80r_4_I"}, {"color": "DodgerBlue", "from": "80r_4_I", "to": "probst_georg"}, {"from": "stehpan_tanhauser", "to": "agnes_80v_3_II"}, {"color": "DodgerBlue", "from": "stehpan_tanhauser", "to": "80v_4_II"}, {"color": "DodgerBlue", "from": "80v_4_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "stehpan_tanhauser", "to": "81r_1_I"}, {"color": "DodgerBlue", "from": "81r_1_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "hans_brunner", "to": "83r_4_II"}, {"color": "DodgerBlue", "from": "83r_4_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "ulrich_strobl", "to": "84r_1_II"}, {"color": "DodgerBlue", "from": "84r_1_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "peter_lamperger", "to": "86r_3_I"}, {"color": "DodgerBlue", "from": "86r_3_I", "to": "abt_paul"}, {"from": "michael_polz", "to": "magdalena_86v_2_I"}, {"color": "DodgerBlue", "from": "michael_polz", "to": "86v_2_I"}, {"color": "DodgerBlue", "from": "86v_2_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "stephan_Gremelsterer", "to": "88r_2_I"}, {"color": "DodgerBlue", "from": "88r_2_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "michael_polz", "to": "88r_1_II"}, {"color": "DodgerBlue", "from": "88r_1_II", "to": "abt_jakob"}, {"color": "DodgerBlue", "from": "stephan_Gremelsterer", "to": "89r_1_I"}, {"color": "DodgerBlue", "from": "89r_1_I", "to": "abt_paul"}, {"from": "konrad_haslinger", "to": "dorothea_92r_2_II"}, {"color": "DodgerBlue", "from": "konrad_haslinger", "to": "92r_2_II"}, {"color": "green", "from": "probst_simon", "to": "klosterneuburg"}, {"color": "DodgerBlue", "from": "92r_2_II", "to": "probst_simon"}, {"from": "hans_passauer", "to": "agnes_92r_3_II"}, {"color": "DodgerBlue", "from": "hans_passauer", "to": "92r_3_II"}, {"color": "DodgerBlue", "from": "92r_3_II", "to": "probst_simon"}, {"from": "hans_rughalm", "to": "barbara_93v_5_II"}, {"color": "DodgerBlue", "from": "hans_rughalm", "to": "93v_5_II"}, {"color": "DodgerBlue", "from": "93v_5_II", "to": "probst_simon"}, {"from": "niclas_rews", "to": "barbara_96r_3_II"}, {"color": "DodgerBlue", "from": "niclas_rews", "to": "96r_3_II"}, {"color": "green", "from": "probst_johannes", "to": "duernstein"}, {"color": "DodgerBlue", "from": "96r_3_II", "to": "probst_johannes"}, {"color": "DodgerBlue", "from": "stephan_raitaler", "to": "96r_4_II"}, {"color": "DodgerBlue", "from": "96r_4_II", "to": "probst_simon"}, {"from": "ulrich_tribel", "to": "margarethe_98r_2_I"}, {"color": "DodgerBlue", "from": "ulrich_tribel", "to": "98r_2_I"}, {"color": "DodgerBlue", "from": "98r_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "hans_rughalm", "to": "100r_6_II"}, {"color": "DodgerBlue", "from": "100r_6_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "konrad_haslinger", "to": "100v_2_I"}, {"color": "DodgerBlue", "from": "100v_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "gengel_tewfell?", "to": "100v_3_I"}, {"color": "DodgerBlue", "from": "100v_3_I", "to": "probst_simon"}, {"from": "martin_krizczendorff", "to": "dorothea_101r_3_II"}, {"color": "DodgerBlue", "from": "martin_krizczendorff", "to": "101r_3_II"}, {"color": "DodgerBlue", "from": "101r_3_II", "to": "probst_simon"}, {"from": "dietrich_trager", "to": "christine_101v_2_II"}, {"color": "DodgerBlue", "from": "dietrich_trager", "to": "101v_2_II"}, {"color": "DodgerBlue", "from": "101v_2_II", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "thomas_sterrker", "to": "102v_3_I"}, {"color": "DodgerBlue", "from": "102v_3_I", "to": "probst_simon"}, {"from": "kainz_zwedlles", "to": "katharina_101v_6_I"}, {"color": "DodgerBlue", "from": "kainz_zwedlles", "to": "102v_6_I"}, {"color": "DodgerBlue", "from": "102v_6_I", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "hans_dromer", "to": "102v_8_I"}, {"color": "DodgerBlue", "from": "102v_8_I", "to": "probst_simon"}, {"from": "erhard_trandl", "to": "margarethe_102v_4_II"}, {"color": "DodgerBlue", "from": "erhard_trandl", "to": "102v_4_II"}, {"color": "DodgerBlue", "from": "102v_4_II", "to": "probst_simon"}, {"from": "paul_gapler", "to": "anna_102v_7_II"}, {"color": "DodgerBlue", "from": "paul_gapler", "to": "102v_7_II"}, {"color": "DodgerBlue", "from": "102v_7_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "konrad_haslinger", "to": "103r_5_I"}, {"color": "DodgerBlue", "from": "103r_5_I", "to": "buergerspital"}, {"from": "andreas_marchfeld", "to": "margarethe_103r_5_II"}, {"color": "DodgerBlue", "from": "andreas_marchfeld", "to": "103r_5_II"}, {"color": "DodgerBlue", "from": "103r_5_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "stephan_phingst", "to": "104r_1_I"}, {"color": "DodgerBlue", "from": "104r_1_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "konrad_haslinger", "to": "105r_4_I"}, {"color": "DodgerBlue", "from": "105r_4_I", "to": "buergerspital"}, {"from": "peter_neunmartter", "to": "katharina_106v_5_I"}, {"color": "DodgerBlue", "from": "peter_neunmartter", "to": "106v_5_I"}, {"color": "DodgerBlue", "from": "106v_5_I", "to": "probst_simon"}, {"from": "thomas_kempel", "to": "agnes_107r_2_I"}, {"color": "DodgerBlue", "from": "thomas_kempel", "to": "107r_2_I"}, {"color": "DodgerBlue", "from": "107r_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "peter_neunmartter", "to": "107r_1_II"}, {"color": "green", "from": "abt_peter", "to": "lilienfeld"}, {"color": "DodgerBlue", "from": "107r_1_II", "to": "abt_peter"}, {"color": "DodgerBlue", "from": "konrad_prrichueber", "to": "108r_6_II"}, {"color": "DodgerBlue", "from": "108r_6_II", "to": "abt_peter"}, {"from": "christian_stunczer", "to": "elisabeth_108v_1_I"}, {"color": "DodgerBlue", "from": "christian_stunczer", "to": "108v_1_I"}, {"color": "green", "from": "chorherren", "to": "passau"}, {"color": "DodgerBlue", "from": "108v_1_I", "to": "chorherren"}, {"from": "stephan_huber", "to": "dorothea_109r_5_I"}, {"color": "DodgerBlue", "from": "stephan_huber", "to": "109r_5_I"}, {"color": "DodgerBlue", "from": "109r_5_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "friedrich_waldhofer", "to": "109r_4_II"}, {"color": "green", "from": "prior_markus", "to": "sedliz"}, {"color": "DodgerBlue", "from": "109r_4_II", "to": "prior_markus"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

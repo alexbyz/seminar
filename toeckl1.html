@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1400px;
+            height: 1400px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "DodgerBlue", "group": 1, "id": "66r_3_I", "label": "66r_3_I\n25.1.1434\nverkauf\nniedermarkt", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "niclas_toeckl", "label": "niclas_toeckl", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "anna_66r_3_I", "label": "anna_66r_3_I", "shape": "dot", "size": 10}, {"color": "Orange", "group": 3, "id": "jacob_winter", "label": "jacob_winter", "shape": "dot", "size": 10}, {"color": "Orange", "group": 3, "id": "agnes_66r_3_I", "label": "agnes_66r_3_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "66v_6_I", "label": "66v_6_I\n21.12.1434\nsatz\npintengasse", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "jacob_mittendrin", "label": "jacob_mittendrin", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "katharina_66v_6_I", "label": "katharina_66v_6_I", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "69v_4_II", "label": "69v_4_II\n25.5.1435\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "konrad_eisner", "label": "konrad_eisner", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "margarethe_69v_4_II", "label": "margarethe_69v_4_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "70v_1_II", "label": "70v_1_II\n21.12.1435\nsatz\npintengasse", "shape": "box", "size": 20}, {"color": "DodgerBlue", "group": 1, "id": "78v_2_II", "label": "78v_2_II\n29.3.1438\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "michael_schehel", "label": "michael_schehel", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "dorothea_78v_2_II", "label": "dorothea_78v_2_II", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "78v_3_II", "label": "78v_3_II\n11.11.1438\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "DodgerBlue", "group": 1, "id": "82v_1_II", "label": "82v_1_II\n24.2.1439\nsatz\nneusiedl", "shape": "box", "size": 20}, {"color": "DodgerBlue", "group": 1, "id": "84r_4_II", "label": "84r_4_II\n11.12.1439\nsatz\nwalichgasse", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "margarethe_witwe_84v_4_II", "label": "margarethe_witwe_84v_4_II", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "hans_fuerer_tod", "label": "hans_fuerer_tod", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "92v_2_II", "label": "92v_2_II\n21.3.1443\nerbe\nneusiedl", "shape": "box", "size": 20}, {"color": "DodgerBlue", "group": 1, "id": "93v_2_I", "label": "93v_2_I\n21.3.1443\nsatz\nwalichgasse", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "stephan_chrotll", "label": "stephan_chrotll", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "93v_3_I", "label": "93v_3_I\n12.6.1443\nsatz\nwalichgasse", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "agnes_93v_3_I", "label": "agnes_93v_3_I", "shape": "dot", "size": 10}, {"color": "Orange", "group": 2, "id": "hans_hackl", "label": "hans_hackl", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "95v_5_II", "label": "95v_5_II\n1444\nverkauf\nwienergasse", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "leopold_floczer", "label": "leopold_floczer", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "101v_6_I", "label": "101v_6_I\n1447\nsatz\nvor_dem_Spital", "shape": "box", "size": 20}, {"color": "Orange", "group": 2, "id": "peter_prem", "label": "peter_prem", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "niclas_toeckl", "to": "66r_3_I", "width": 3}, {"arrows": "to", "color": "Orange", "from": "jacob_winter", "to": "agnes_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "agnes_66r_3_I", "to": "jacob_winter"}, {"arrows": "to", "color": "DodgerBlue", "from": "66r_3_I", "to": "jacob_winter", "width": 3}, {"arrows": "to", "color": "Orange", "from": "jacob_mittendrin", "to": "katharina_66v_6_I"}, {"arrows": "to", "color": "Orange", "from": "katharina_66v_6_I", "to": "jacob_mittendrin"}, {"arrows": "to", "color": "DodgerBlue", "from": "jacob_mittendrin", "to": "66v_6_I", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "66v_6_I", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "konrad_eisner", "to": "margarethe_69v_4_II"}, {"arrows": "to", "color": "Orange", "from": "margarethe_69v_4_II", "to": "konrad_eisner"}, {"arrows": "to", "color": "DodgerBlue", "from": "konrad_eisner", "to": "69v_4_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "69v_4_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "jacob_mittendrin", "to": "katharina_66v_6_I"}, {"arrows": "to", "color": "Orange", "from": "katharina_66v_6_I", "to": "jacob_mittendrin"}, {"arrows": "to", "color": "DodgerBlue", "from": "jacob_mittendrin", "to": "70v_1_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "70v_1_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "michael_schehel", "to": "dorothea_78v_2_II"}, {"arrows": "to", "color": "Orange", "from": "dorothea_78v_2_II", "to": "michael_schehel"}, {"arrows": "to", "color": "DodgerBlue", "from": "michael_schehel", "to": "78v_2_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "78v_2_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "konrad_eisner", "to": "margarethe_69v_4_II"}, {"arrows": "to", "color": "Orange", "from": "margarethe_69v_4_II", "to": "konrad_eisner"}, {"arrows": "to", "color": "DodgerBlue", "from": "konrad_eisner", "to": "78v_3_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "78v_3_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "michael_schehel", "to": "dorothea_78v_2_II"}, {"arrows": "to", "color": "Orange", "from": "dorothea_78v_2_II", "to": "michael_schehel"}, {"arrows": "to", "color": "DodgerBlue", "from": "michael_schehel", "to": "82v_1_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "82v_1_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "margarethe_witwe_84v_4_II", "to": "hans_fuerer_tod"}, {"arrows": "to", "color": "Orange", "from": "hans_fuerer_tod", "to": "margarethe_witwe_84v_4_II"}, {"arrows": "to", "color": "DodgerBlue", "from": "margarethe_witwe_84v_4_II", "to": "84r_4_II", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "84r_4_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "konrad_eisner", "to": "92v_2_II", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "92v_2_II", "to": "konrad_eisner", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "stephan_chrotll", "to": "93v_2_I", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "93v_2_I", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "Orange", "from": "agnes_93v_3_I", "to": "hans_hackl"}, {"arrows": "to", "color": "Orange", "from": "hans_hackl", "to": "agnes_93v_3_I"}, {"arrows": "to", "color": "DodgerBlue", "from": "agnes_93v_3_I", "to": "93v_3_I", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "93v_3_I", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "leopold_floczer", "to": "95v_5_II", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "95v_5_II", "to": "niclas_toeckl", "width": 3}, {"arrows": "to", "color": "DodgerBlue", "from": "peter_prem", "to": "101v_6_I", "width": 3}, {"arrows": "to", "color": "Orange", "from": "niclas_toeckl", "to": "anna_66r_3_I"}, {"arrows": "to", "color": "Orange", "from": "anna_66r_3_I", "to": "niclas_toeckl"}, {"arrows": "to", "color": "DodgerBlue", "from": "101v_6_I", "to": "niclas_toeckl", "width": 3}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
