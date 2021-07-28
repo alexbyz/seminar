@@ -1,0 +1,302 @@
+{
+	"61v_3_I":{
+		"issuer":["niklas_von_waidhofen", "katharina_61v_3_I"],
+		"obj":"weingarten",
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"61v_3_II":{
+		"issuer":["philipp_woelteich", "katharina_61v_3_II"],
+		"obj":["haus"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"61v_6_I":{
+		"issuer":["peter_?tsseuh", "katharina_61v_6_I"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"61v_7_I":{
+		"issuer":["oswald_sawr", "margarethe_61v_7_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"61v_2_II":{
+		"issuer":["ulrich_pamays", "anna_61v_2_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"62v_3_II":{
+		"issuer":["stephan_friml", "anna_62v_3_II"],
+		"obj":["haus"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"63r_1_I":{
+		"issuer":["georg_awer", "elisabeth_63r_1_I"],
+		"obj":["weingarten"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"64r_3_II":{
+		"issuer":["albrecht_kuninger", "clara_64r_3_II"],
+		"obj":["haus"],
+		"recipient":["abt_jakob", "kremsmuenster"]
+	},
+	"65r_1_I":{
+		"issuer":["bernhard_hofkircher", "anna_65r_1_I"],
+		"obj":["haus"],
+		"recipient":["abt_jakob", "kremsmuenster"]
+	},
+	"65r_3_I":{
+		"issuer":["frau_agnes", "heinrich_peffer"],
+		"obj":["haus"],
+		"recipient":["abt_jakob", "kremsmuenster"]
+	},
+	"65v_3_II":{
+		"issuer":["andreas_bruzsch", "65v_3_II"],
+		"obj":["haus"],
+		"recipient":["sankt_stephan_altar", "pfarrkirche"]
+	},
+	"65v_3_I":{
+		"issuer":["hans_schopphouben", "katharina61v_2_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"66v_4_II":{
+		"issuer":["philipp_fremstamer", "margarethe_66v_4_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"67r_3_II":{
+		"issuer":["syman_premen", "agnes_67r_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_hans", "passau"]
+	},
+	"67v_3_I":{
+		"issuer":["hans_brunner", "agnes_67v_3_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"67v_4_I":{
+		"issuer":["ulrich_strobl", "dorothea_67v_4_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"67v_3_II":{
+		"issuer":["wolfgang_rynner", "elisabeth_67v_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"69r_1_I":{
+		"issuer":["reinhard_umbcherer", "elisabeth_69r_1_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"69r_5_I":{
+		"issuer":["thomas_payr", "margarethe_69r_5_I"],
+		"obj":["haus"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"70r_3_II":{
+		"issuer":["thomas_smyzer", "elisabeth_70r_3_II"],
+		"obj":["weingarten"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"70v_1_I":{
+		"issuer":["paul_hofman", "agnes_70v_1_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"76v_3_I":{
+		"issuer":["hans_hofer", "kunigunde_76v_2_I"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"80v_1_II":{
+		"issuer":["jacob_mittendrin", "katharina_80v_1_II"],
+		"obj":["weingarten"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"80r_4_I":{
+		"issuer":["frau_margarethe_80r_4_I", "hans_fürer"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"80v_4_II":{
+		"issuer":["stehpan_tanhauser", "agnes_80v_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"81r_1_I":{
+		"issuer":["stehpan_tanhauser", "agnes_80v_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"83r_4_II":{
+		"issuer":["hans_brunner", "agnes_67v_3_I"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+		"84r_1_II":{
+		"issuer":["ulrich_strobl", "dorothea_67v_4_I"],
+		"obj":["weingarten"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"86r_3_I":{
+		"issuer":["peter_lamperger"],
+		"obj":["weingarten"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"86v_2_I":{
+		"issuer":["michael_polz","magdalena_86v_2_I"],
+		"obj":["haus"],
+		"recipient":["probst_georg", "klosterneuburg"]
+	},
+	"88r_2_I":{
+		"issuer":["stephan_Gremelsterer"],
+		"obj":["haus"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"88r_1_II":{
+		"issuer":["michael_polz", "magdalena_86v_2_I"],
+		"obj":["haus"],
+		"recipient":["abt_jakob", "kremsmuenster"]
+	},
+	"89r_1_I":{
+		"issuer":["stephan_Gremelsterer"],
+		"obj":["haus"],
+		"recipient":["abt_paul", "sedliz"]
+	},
+	"92r_2_II":{
+		"issuer":["konrad_haslinger","dorothea_92r_2_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"92r_3_II":{
+		"issuer":["hans_passauer","agnes_92r_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"93v_5_II":{
+		"issuer":["hans_rughalm","barbara_93v_5_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"96r_3_II":{
+		"issuer":["niclas_rews","barbara_96r_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_johannes", "duernstein"]
+	},
+	"96r_4_II":{
+		"issuer":["stephan_raitaler"],
+		"obj":["weingarten"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"98r_2_I":{
+		"issuer":["ulrich_tribel", "margarethe_98r_2_I"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"100r_6_II":{
+		"issuer":["hans_rughalm", "barbara_93v_5_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"100v_2_I":{
+		"issuer":["konrad_haslinger", "dorothea_92r_2_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"100v_3_I":{
+		"issuer":["gengel_tewfell?"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"101r_3_II":{
+		"issuer":["martin_krizczendorff", "dorothea_101r_3_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"101v_2_II":{
+		"issuer":["dietrich_trager", "christine_101v_2_II"],
+		"obj":["haus"],
+		"recipient":["buergerspital"]
+	},
+	"102v_3_I":{
+		"issuer":["thomas_sterrker"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"102v_6_I":{
+		"issuer":["kainz_zwedlles", "katharina_101v_6_I"],
+		"obj":["haus"],
+		"recipient":["buergerspital"]
+	},
+	"102v_8_I":{
+		"issuer":["hans_dromer"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"102v_4_II":{
+		"issuer":["erhard_trandl", "margarethe_102v_4_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"102v_7_II":{
+		"issuer":["paul_gapler", "anna_102v_7_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"103r_5_I":{
+		"issuer":["konrad_haslinger", "dorothea_92r_2_II"],
+		"obj":["haus"],
+		"recipient":["buergerspital"]
+	},
+	"103r_5_II":{
+		"issuer":["andreas_marchfeld", "margarethe_103r_5_II"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"104r_1_I":{
+		"issuer":["stephan_phingst"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"105r_4_I":{
+		"issuer":["konrad_haslinger", "dorothea_92r_2_II"],
+		"obj":["haus"],
+		"recipient":["buergerspital"]
+	},
+	"106v_5_I":{
+		"issuer":["peter_neunmartter", "katharina_106v_5_I"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"107r_2_I":{
+		"issuer":["thomas_kempel", "agnes_107r_2_I"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"107r_1_II":{
+		"issuer":["peter_neunmartter", "katharina_106v_5_I"],
+		"obj":["haus"],
+		"recipient":["abt_peter", "lilienfeld"]
+	},
+	"108r_6_II":{
+		"issuer":["konrad_prrichueber"],
+		"obj":["haus"],
+		"recipient":["abt_peter", "lilienfeld"]
+	},
+	"108v_1_I":{
+		"issuer":["christian_stunczer", "elisabeth_108v_1_I"],
+		"obj":["haus"],
+		"recipient":["chorherren", "passau"]
+	},
+	"109r_5_I":{
+		"issuer":["stephan_huber", "dorothea_109r_5_I"],
+		"obj":["haus"],
+		"recipient":["probst_simon", "klosterneuburg"]
+	},
+	"109r_4_II":{
+		"issuer":["friedrich_waldhofer"],
+		"obj":["haus"],
+		"recipient":["prior_markus", "sedliz"]
+	}
+}

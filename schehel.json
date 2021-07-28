@@ -1,0 +1,26 @@
+{
+	"78v_1_II":{
+		"issuer":["agnes_frau_von_georg_symerman_78v_1_II"],
+		"recipient":["michael_schehel", "dorothea_78v_2_II"],
+		"type":"kauf",
+		"date":"28.3.1438",
+		"link_place":["3v","neusiedl"],
+		"link_debt":[""]
+	},
+	"78v_2_II":{
+		"issuer":["michael_schehel", "dorothea_78v_2_II"],
+		"recipient":["agnes_frau_von_georg_symerman_78v_1_II", "niclas_toeckl"],
+		"type":"satz",
+		"date":"29.3.1438",
+		"link_place":["3v","neusiedl"],
+		"link_debt":[""]
+	},
+	"82v_1_II":{
+		"issuer":["michael_schehel", "dorothea_78v_2_II"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"24.2.1439",
+		"link_place":["3v","neusiedl"],
+		"link_debt":[""]
+	}
+}

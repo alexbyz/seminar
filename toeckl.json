@@ -1,0 +1,106 @@
+{
+	"66r_3_I":{
+		"issuer":["niclas_toeckl", "anna_66r_3_I"],
+		"recipient":["jacob_winter", "agnes_66r_3_I"],
+		"type":"verkauf",
+		"date":"25.1.1434",
+		"link_place":["1r","niedermarkt"],
+		"link_debt":[""]
+	},
+	"66v_6_I":{
+		"issuer":["jacob_mittendrin", "katharina_66v_6_I"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"21.12.1434",
+		"link_place":["7v","pintengasse"],
+		"link_debt":[""]
+	},
+	"69v_4_II":{
+		"issuer":["konrad_eisner", "margarethe_69v_4_II"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"25.5.1435",
+		"link_place":["2v","neusiedl"],
+		"link_debt":["58v"]
+	},
+	"70v_1_II":{
+		"issuer":["jacob_mittendrin", "katharina_66v_6_I"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"21.12.1435",
+		"link_place":["7v","pintengasse"],
+		"link_debt":[""]
+	},
+	"78v_2_II":{
+		"issuer":["michael_schehel", "dorothea_78v_2_II"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"29.3.1438",
+		"link_place":["3v","neusiedl"],
+		"link_debt":[""]
+	},
+	"78v_3_II":{
+		"issuer":["konrad_eisner", "margarethe_69v_4_II"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"11.11.1438",
+		"link_place":["2v","neusiedl"],
+		"link_debt":["58v"]
+	},
+	"82v_1_II":{
+		"issuer":["michael_schehel", "dorothea_78v_2_II"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"24.2.1439",
+		"link_place":["3v","neusiedl"],
+		"link_debt":[""]
+	},
+	"84r_4_II":{
+		"issuer":["margarethe_witwe_84v_4_II", "hans_fuerer_tod"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"11.12.1439",
+		"link_place":["3v","walichgasse"],
+		"link_debt":[""]
+	},
+	"92v_2_II":{
+		"issuer":["konrad_eisner"],
+		"recipient":["konrad_eisner"],
+		"type":"erbe",
+		"date":"21.3.1443",
+		"link_place":["2v","neusiedl"],
+		"link_debt":["58v"]
+	},
+	"93v_2_I":{
+		"issuer":["stephan_chrotll"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"21.3.1443",
+		"link_place":["","walichgasse"],
+		"link_debt":[""]
+	},
+	"93v_3_I":{
+		"issuer":["agnes_93v_3_I", "hans_hackl"],
+		"recipient":["niclas_toeckl", "anna_66r_3_I"],
+		"type":"satz",
+		"date":"12.6.1443",
+		"link_place":["","walichgasse"],
+		"link_debt":[""]
+	},
+	"95v_5_II":{
+		"issuer":["leopold_floczer"],
+		"recipient":["niclas_toeckl"],
+		"type":"verkauf",
+		"date":"1444",
+		"link_place":["16v","wienergasse"],
+		"link_debt":[""]
+	},
+	"101v_6_I":{
+		"issuer":["peter_prem"],
+		"recipient":["niclas_toeckl","anna_66r_3_I"],
+		"type":"satz",
+		"date":"1447",
+		"link_place":["","vor_dem_Spital"],
+		"link_debt":[""]
+	}
+}
