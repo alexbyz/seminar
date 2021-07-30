@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1400px;
+            height: 1400px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "DodgerBlue", "group": 1, "id": "61v_3_I", "label": "61v_3_I", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "green", "group": 3, "id": "abt_paul", "label": "abt_paul", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "sedliz", "label": "sedliz", "shape": "dot", "size": 10}, {"color": "orange", "group": 3, "id": "lange_gasse", "label": "lange_gasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_6_I", "label": "61v_6_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "probst_georg", "label": "probst_georg", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "klosterneuburg", "label": "klosterneuburg", "shape": "dot", "size": 10}, {"color": "orange", "group": 3, "id": "plinttengasse", "label": "plinttengasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_7_I", "label": "61v_7_I", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "61v_2_II", "label": "61v_2_II", "shape": "box", "size": 20, "title": ["haus", "tullnergasse"]}, {"color": "orange", "group": 3, "id": "tullnergasse", "label": "tullnergasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "61v_3_II", "label": "61v_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "62v_3_II", "label": "62v_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "63r_1_I", "label": "63r_1_I", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "64r_3_II", "label": "64r_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "abt_jakob", "label": "abt_jakob", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "kremsmuenster", "label": "kremsmuenster", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65r_1_I", "label": "65r_1_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "65r_3_I", "label": "65r_3_I", "shape": "box", "size": 20, "title": ["haus", "walichgasse"]}, {"color": "orange", "group": 3, "id": "walichgasse", "label": "walichgasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "65v_3_I", "label": "65v_3_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "65v_3_II", "label": "65v_3_II", "shape": "box", "size": 20, "title": ["haus", "vor_dem_chorherrenspital"]}, {"color": "green", "group": 3, "id": "sankt_stephan_altar", "label": "sankt_stephan_altar", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "pfarrkirche", "label": "pfarrkirche", "shape": "dot", "size": 10}, {"color": "orange", "group": 3, "id": "vor_dem_chorherrenspital", "label": "vor_dem_chorherrenspital", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "66v_4_II", "label": "66v_4_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "67r_3_II", "label": "67r_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "probst_hans", "label": "probst_hans", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "passau", "label": "passau", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67v_3_I", "label": "67v_3_I", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "67v_4_I", "label": "67v_4_I", "shape": "box", "size": 20, "title": ["weingarten", "eisengraben"]}, {"color": "orange", "group": 3, "id": "eisengraben", "label": "eisengraben", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "67v_3_II", "label": "67v_3_II", "shape": "box", "size": 20, "title": ["haus", "spitalgasse"]}, {"color": "orange", "group": 3, "id": "spitalgasse", "label": "spitalgasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "69r_1_I", "label": "69r_1_I", "shape": "box", "size": 20, "title": ["weingarten", "reichengraben"]}, {"color": "orange", "group": 3, "id": "reichengraben", "label": "reichengraben", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "69r_5_I", "label": "69r_5_I", "shape": "box", "size": 20, "title": ["haus", "chollergasse"]}, {"color": "orange", "group": 3, "id": "chollergasse", "label": "chollergasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "70r_3_II", "label": "70r_3_II", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "70v_1_I", "label": "70v_1_I", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "76v_3_I", "label": "76v_3_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "80v_1_II", "label": "80v_1_II", "shape": "box", "size": 20, "title": ["weingarten", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "80r_4_I", "label": "80r_4_I", "shape": "box", "size": 20, "title": ["haus", "walichgasse"]}, {"color": "DodgerBlue", "group": 1, "id": "81r_1_I", "label": "81r_1_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "83r_4_II", "label": "83r_4_II", "shape": "box", "size": 20, "title": ["haus", "tullnergasse"]}, {"color": "DodgerBlue", "group": 1, "id": "84r_1_II", "label": "84r_1_II", "shape": "box", "size": 20, "title": ["weingarten", "eisengraben"]}, {"color": "DodgerBlue", "group": 1, "id": "86r_3_I", "label": "86r_3_I", "shape": "box", "size": 20, "title": ["weingarten", "remming"]}, {"color": "orange", "group": 3, "id": "remming", "label": "remming", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "86v_2_I", "label": "86v_2_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "88r_2_I", "label": "88r_2_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "orange", "group": 3, "id": "neusiedl", "label": "neusiedl", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "88r_1_II", "label": "88r_1_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "89r_1_I", "label": "89r_1_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "92r_2_II", "label": "92r_2_II", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "green", "group": 3, "id": "probst_simon", "label": "probst_simon", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "92r_3_II", "label": "92r_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "93v_5_II", "label": "93v_5_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "96r_3_II", "label": "96r_3_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "probst_johannes", "label": "probst_johannes", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "duernstein", "label": "duernstein", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "96r_4_II", "label": "96r_4_II", "shape": "box", "size": 20, "title": ["weingarten", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "98r_2_I", "label": "98r_2_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "100r_6_II", "label": "100r_6_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "100v_2_I", "label": "100v_2_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "100v_3_I", "label": "100v_3_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "101r_3_II", "label": "101r_3_II", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "101v_2_II", "label": "101v_2_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "buergerspital", "label": "buergerspital", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "102v_3_I", "label": "102v_3_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "102v_6_I", "label": "102v_6_I", "shape": "box", "size": 20, "title": ["haus", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "102v_8_I", "label": "102v_8_I", "shape": "box", "size": 20, "title": ["haus", "lange_gasse"]}, {"color": "DodgerBlue", "group": 1, "id": "102v_4_II", "label": "102v_4_II", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "102v_7_II", "label": "102v_7_II", "shape": "box", "size": 20, "title": ["haus", "walichgasse"]}, {"color": "DodgerBlue", "group": 1, "id": "103r_5_I", "label": "103r_5_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "103r_5_II", "label": "103r_5_II", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "104r_1_I", "label": "104r_1_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "105r_4_I", "label": "105r_4_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "106v_5_I", "label": "106v_5_I", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "DodgerBlue", "group": 1, "id": "107r_2_I", "label": "107r_2_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "107r_1_II", "label": "107r_1_II", "shape": "box", "size": 20, "title": ["haus", "neusiedl"]}, {"color": "green", "group": 3, "id": "abt_peter", "label": "abt_peter", "shape": "dot", "size": 10}, {"color": "green", "group": 3, "id": "lilienfeld", "label": "lilienfeld", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "108r_6_II", "label": "108r_6_II", "shape": "box", "size": 20, "title": ["haus", "preugasse"]}, {"color": "orange", "group": 3, "id": "preugasse", "label": "preugasse", "shape": "diamond", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "108v_1_I", "label": "108v_1_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "green", "group": 3, "id": "chorherren", "label": "chorherren", "shape": "dot", "size": 10}, {"color": "DodgerBlue", "group": 1, "id": "109r_5_I", "label": "109r_5_I", "shape": "box", "size": 20, "title": ["haus", "plinttengasse"]}, {"color": "DodgerBlue", "group": 1, "id": "109r_4_II", "label": "109r_4_II", "shape": "box", "size": 20, "title": ["haus", "lange_gasse"]}, {"color": "green", "group": 3, "id": "prior_markus", "label": "prior_markus", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"color": "green", "from": "abt_paul", "to": "sedliz"}, {"color": "DodgerBlue", "from": "61v_3_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "61v_3_I"}, {"color": "green", "from": "probst_georg", "to": "klosterneuburg"}, {"color": "DodgerBlue", "from": "61v_6_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "61v_6_I"}, {"color": "DodgerBlue", "from": "61v_7_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "61v_7_I"}, {"color": "DodgerBlue", "from": "61v_2_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "tullnergasse", "to": "61v_2_II"}, {"color": "DodgerBlue", "from": "61v_3_II", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "61v_3_II"}, {"color": "DodgerBlue", "from": "62v_3_II", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "62v_3_II"}, {"color": "DodgerBlue", "from": "63r_1_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "63r_1_I"}, {"color": "green", "from": "abt_jakob", "to": "kremsmuenster"}, {"color": "DodgerBlue", "from": "64r_3_II", "to": "abt_jakob"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "64r_3_II"}, {"color": "DodgerBlue", "from": "65r_1_I", "to": "abt_jakob"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "65r_1_I"}, {"color": "DodgerBlue", "from": "65r_3_I", "to": "abt_jakob"}, {"color": "DodgerBlue", "from": "walichgasse", "to": "65r_3_I"}, {"color": "DodgerBlue", "from": "65v_3_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "65v_3_I"}, {"color": "green", "from": "sankt_stephan_altar", "to": "pfarrkirche"}, {"color": "DodgerBlue", "from": "65v_3_II", "to": "sankt_stephan_altar"}, {"color": "DodgerBlue", "from": "vor_dem_chorherrenspital", "to": "65v_3_II"}, {"color": "DodgerBlue", "from": "66v_4_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "66v_4_II"}, {"color": "green", "from": "probst_hans", "to": "passau"}, {"color": "DodgerBlue", "from": "67r_3_II", "to": "probst_hans"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "67r_3_II"}, {"color": "DodgerBlue", "from": "67v_3_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "67v_3_I"}, {"color": "DodgerBlue", "from": "67v_4_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "eisengraben", "to": "67v_4_I"}, {"color": "DodgerBlue", "from": "67v_3_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "spitalgasse", "to": "67v_3_II"}, {"color": "DodgerBlue", "from": "69r_1_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "reichengraben", "to": "69r_1_I"}, {"color": "DodgerBlue", "from": "69r_5_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "chollergasse", "to": "69r_5_I"}, {"color": "DodgerBlue", "from": "70r_3_II", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "70r_3_II"}, {"color": "DodgerBlue", "from": "70v_1_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "70v_1_I"}, {"color": "DodgerBlue", "from": "76v_3_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "76v_3_I"}, {"color": "DodgerBlue", "from": "80v_1_II", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "80v_1_II"}, {"color": "DodgerBlue", "from": "80r_4_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "walichgasse", "to": "80r_4_I"}, {"color": "DodgerBlue", "from": "81r_1_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "81r_1_I"}, {"color": "DodgerBlue", "from": "83r_4_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "tullnergasse", "to": "83r_4_II"}, {"color": "DodgerBlue", "from": "84r_1_II", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "eisengraben", "to": "84r_1_II"}, {"color": "DodgerBlue", "from": "86r_3_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "remming", "to": "86r_3_I"}, {"color": "DodgerBlue", "from": "86v_2_I", "to": "probst_georg"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "86v_2_I"}, {"color": "DodgerBlue", "from": "88r_2_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "88r_2_I"}, {"color": "DodgerBlue", "from": "88r_1_II", "to": "abt_jakob"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "88r_1_II"}, {"color": "DodgerBlue", "from": "89r_1_I", "to": "abt_paul"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "89r_1_I"}, {"color": "green", "from": "probst_simon", "to": "klosterneuburg"}, {"color": "DodgerBlue", "from": "92r_2_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "92r_2_II"}, {"color": "DodgerBlue", "from": "92r_3_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "92r_3_II"}, {"color": "DodgerBlue", "from": "93v_5_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "93v_5_II"}, {"color": "green", "from": "probst_johannes", "to": "duernstein"}, {"color": "DodgerBlue", "from": "96r_3_II", "to": "probst_johannes"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "96r_3_II"}, {"color": "DodgerBlue", "from": "96r_4_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "96r_4_II"}, {"color": "DodgerBlue", "from": "98r_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "98r_2_I"}, {"color": "DodgerBlue", "from": "100r_6_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "100r_6_II"}, {"color": "DodgerBlue", "from": "100v_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "100v_2_I"}, {"color": "DodgerBlue", "from": "100v_3_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "100v_3_I"}, {"color": "DodgerBlue", "from": "101r_3_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "101r_3_II"}, {"color": "DodgerBlue", "from": "101v_2_II", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "101v_2_II"}, {"color": "DodgerBlue", "from": "102v_3_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "102v_3_I"}, {"color": "DodgerBlue", "from": "102v_6_I", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "102v_6_I"}, {"color": "DodgerBlue", "from": "102v_8_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "102v_8_I"}, {"color": "DodgerBlue", "from": "102v_4_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "102v_4_II"}, {"color": "DodgerBlue", "from": "102v_7_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "walichgasse", "to": "102v_7_II"}, {"color": "DodgerBlue", "from": "103r_5_I", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "103r_5_I"}, {"color": "DodgerBlue", "from": "103r_5_II", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "103r_5_II"}, {"color": "DodgerBlue", "from": "104r_1_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "104r_1_I"}, {"color": "DodgerBlue", "from": "105r_4_I", "to": "buergerspital"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "105r_4_I"}, {"color": "DodgerBlue", "from": "106v_5_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "106v_5_I"}, {"color": "DodgerBlue", "from": "107r_2_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "107r_2_I"}, {"color": "green", "from": "abt_peter", "to": "lilienfeld"}, {"color": "DodgerBlue", "from": "107r_1_II", "to": "abt_peter"}, {"color": "DodgerBlue", "from": "neusiedl", "to": "107r_1_II"}, {"color": "DodgerBlue", "from": "108r_6_II", "to": "abt_peter"}, {"color": "DodgerBlue", "from": "preugasse", "to": "108r_6_II"}, {"color": "green", "from": "chorherren", "to": "passau"}, {"color": "DodgerBlue", "from": "108v_1_I", "to": "chorherren"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "108v_1_I"}, {"color": "DodgerBlue", "from": "109r_5_I", "to": "probst_simon"}, {"color": "DodgerBlue", "from": "plinttengasse", "to": "109r_5_I"}, {"color": "green", "from": "prior_markus", "to": "sedliz"}, {"color": "DodgerBlue", "from": "109r_4_II", "to": "prior_markus"}, {"color": "DodgerBlue", "from": "lange_gasse", "to": "109r_4_II"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
